@@ -1,0 +1,42 @@
+#!/bin/bash
+
+function repositoryClone(){
+  URL=${entry%.git}
+  TAR='/tarball/master'
+  wget -O name.tar.gz $URL$TAR
+  tar -xvf name.tar.gz
+  rm -rf name.tar.gz
+}
+
+function helpF(){
+  printf '
+  [INFORMATION]
+
+    This script acts like git. Instead of using <git clone URL>, it gets the actual TAR.GZ file and extract, further removing the TAR.GZ file.
+    Useful for systems that use different kernel, such as Android.
+
+  [USAGE]
+
+    -U: use this to set your git URL.
+    -h: prints this option.
+    -v: prints the version of the script.
+
+'
+}
+
+function versionF(){
+  printf '  lessgit 1.0 - KanuX-14 | 08/26/2020 ~ 3:49AM'
+}
+
+while getopts ':hvU:' opt; do
+  case $opt in
+    h) helpF
+    ;;
+    v) versionF
+    ;;
+    U) entry="$OPTARG"; repositoryClone
+    ;;
+    *) printf 'This input does not exists!'
+    ;;
+  esac
+done
