@@ -11,19 +11,18 @@ $: chmod +x lessgit
 ```
 Then you can run it:
 ```shell
-$: ./lessgit
+$: ./lessgit URL
 ```
 
 If you don't want to give permissions, run it with `bash` command:
 ```shell
-$: bash lessgit
+$: bash lessgit URL
 ```
 
 ## Commands ##
 
 The options of the script are simple.
 ```shell
--U: use this to set your git URL.
 -h: prints the help page.
 -v: prints the version.
 ```
