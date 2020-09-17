@@ -1,7 +1,9 @@
 #!/bin/bash
 
+mainURL="$1"
+
 function repositoryClone(){
-  URL=${entry%.git}
+  URL=${mainURL%.git}
   TAR='/tarball/master'
   wget -O name.tar.gz $URL$TAR
   tar -xvf name.tar.gz
@@ -17,7 +19,10 @@ function helpF(){
 
   [USAGE]
 
-    -U: use this to set your git URL.
+    bash lessgit URL
+
+  [COMMANDS]
+
     -h: prints this option.
     -v: prints the version of the script.
 
@@ -25,18 +30,22 @@ function helpF(){
 }
 
 function versionF(){
-  printf '  lessgit 1.0 - KanuX-14 | 08/26/2020 ~ 3:49AM'
+  printf '  lessgit 1.1 - KanuX-14 | 09/17/2020 ~ 1:25AM'
 }
 
-while getopts ':hvU:' opt; do
+while getopts ':hv' opt; do
   case $opt in
     h) helpF
     ;;
     v) versionF
     ;;
-    U) entry="$OPTARG"; repositoryClone
-    ;;
     *) printf 'This input does not exists!'
     ;;
   esac
 done
+
+if [ "$mainURL" != "" ]; then
+  repositoryClone
+else
+  helpF
+fi
